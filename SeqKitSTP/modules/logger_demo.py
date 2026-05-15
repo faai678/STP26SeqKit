@@ -71,11 +71,11 @@ CRITICAL → Serious failure, program may stop
 
 # Step 2: Get the logger (this is the key idea)
 import logging
-#logger = logging.getLogger(__name__)
-#logger.setLevel(logging.DEBUG)
-logging.basicConfig(level=logging.DEBUG #need this to globally config logging cause console also have and overwites.
-
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG #need this to globally config logging cause console also have and overwites.
+
+#logger = logging.getLogger(__name__)
 
 
 
