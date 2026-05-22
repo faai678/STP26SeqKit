@@ -13,7 +13,7 @@ WHEN explicitly requested.
 ----------------------------------------
 HOW TO USE
 ----------------------------------------
-Call the setup function ONCE at application start:
+Call the setup function ONCE at application start(in main.py):
 
     from SeqKitSTP.logger import setup_logging
     setup_logging()

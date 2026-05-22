@@ -47,7 +47,6 @@ if log_dir:
 LOGGING_CONFIG = {
     "version": 1,
     "disable_existing_loggers": False,
-
     # --------------------------------------------------
     # FORMATTERS
     # --------------------------------------------------
@@ -59,7 +58,6 @@ LOGGING_CONFIG = {
             )
         }
     },
-
     # --------------------------------------------------
     # HANDLERS
     # --------------------------------------------------
@@ -69,7 +67,6 @@ LOGGING_CONFIG = {
             "level": "INFO",
             "formatter": "standard",
         },
-
         # --------------------------------------------------
         # ROTATING FILE HANDLER (UPDATED)
         # --------------------------------------------------
@@ -79,14 +76,11 @@ LOGGING_CONFIG = {
         #
         "file": {
             "class": "logging.handlers.RotatingFileHandler",
-
             # Only store ERROR and CRITICAL messages in file
             # (keeps disk usage focused on important events)
             "level": "ERROR",
-
             "formatter": "standard",
             "filename": LOG_FILE,
-
             # --------------------------------------------------
             # ROTATION SETTINGS (IMPORTANT TEACHING POINT)
             # --------------------------------------------------
@@ -100,7 +94,6 @@ LOGGING_CONFIG = {
             # Here we set a small size for demonstration.
             #
             "maxBytes": 1024 * 50,  # 50 KB
-
             #
             # backupCount:
             # Number of OLD log files to retain.
@@ -121,35 +114,30 @@ LOGGING_CONFIG = {
             #   new empty .log is created
             #
             "backupCount": 3,
-
             # Optional: ensures file opens safely even if reused
             "encoding": "utf-8",
         },
     },
-
     # ---------------------------------------------------------------------------------------
-    # OPTIONAL: NAMED LOGGER (TEACHING EXAMPLE) - But easy to import into other tools by name
+    # OPTIONAL: NAMED LOGGER (TEACHING EXAMPLE) - But easy to import into other
+    # tools by name
     # ---------------------------------------------------------------------------------------
     "loggers": {
         "SeqKitSTP": {
-
             # Capture everything at this level;
             # handlers will decide what gets written
             "level": "DEBUG",
-
             # Send logs to both console and rotating file
             "handlers": ["console", "file"],
-
             # Prevent duplication from parent/root loggers
-            "propagate": False
+            "propagate": False,
         },
     },
-
     # --------------------------------------------------
     # ROOT LOGGER
     # --------------------------------------------------
     "root": {
         "level": "DEBUG",
         "handlers": ["console", "file"],
-    }
+    },
 }
