@@ -23,7 +23,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 #importing pre-defined functions instead of repeating code
-from SeqKitSTP.modules.sequence_chunker import clean_sequence, validate_sequence
+from SeqKitSTP.modules.seq_separator import clean_sequence, validate_sequence
 
 def format_genb_sequence(sequence):
     """
