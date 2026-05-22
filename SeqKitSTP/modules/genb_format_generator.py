@@ -73,7 +73,5 @@ def format_genb_sequence(sequence):
         genb_seq += formatted_line + "\n"
 
     logger.debug("Formatted GenBank sequence: \n %s" , genb_seq)
-
+    
     return genb_seq
-
-
