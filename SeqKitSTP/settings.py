@@ -20,6 +20,8 @@ import os
 
 # --------------------------------------------------
 # STEP 1: Define default log file (hidden, home directory)
+# this bit here is so that you dont hardcode paths, so its usable on any system without modification
+# creates path string for hidden log to be used later
 # --------------------------------------------------
 home_dir = os.path.expanduser("~")
 DEFAULT_LOG = os.path.join(home_dir, ".seqkitstp.log")
@@ -35,6 +37,7 @@ LOG_FILE = os.path.abspath(os.path.expanduser(LOG_FILE))
 
 # --------------------------------------------------
 # STEP 3: Ensure directory exists
+# and if dont, it will create it (defensive step))
 # --------------------------------------------------
 log_dir = os.path.dirname(LOG_FILE)
 if log_dir:
@@ -43,12 +46,13 @@ if log_dir:
 
 # --------------------------------------------------
 # STEP 4: Logging configuration
+# four main sections: formatters, handlers, loggers, root
 # --------------------------------------------------
 LOGGING_CONFIG = {
-    "version": 1,
-    "disable_existing_loggers": False,
+    "version": 1, #always 1. leave as it is
+    "disable_existing_loggers": False, #so you dont change other moduels or confiq for other loggers or tools
     # --------------------------------------------------
-    # FORMATTERS
+    # FORMATTERS: how log looks
     # --------------------------------------------------
     "formatters": {
         "standard": {
@@ -59,7 +63,8 @@ LOGGING_CONFIG = {
         }
     },
     # --------------------------------------------------
-    # HANDLERS
+    # HANDLERS: where logs are sent, decides where your log messages go console and/or file
+    # why not start level at debug? debug is like print, u dont need to log but u want info
     # --------------------------------------------------
     "handlers": {
         "console": {
