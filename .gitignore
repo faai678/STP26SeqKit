@@ -1,0 +1,72 @@
+# =========================
+# Python cache files
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Compiled extensions
+# =========================
+*.so
+
+# =========================
+# Distribution / packaging
+# =========================
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =========================
+# Virtual environments
+# =========================
+venv/
+.env/
+.envrc
+.venv/
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.swp
+*.bak
+
+# =========================
+# IDE / Editor files
+# =========================
+.vscode/
+.idea/
+*.code-workspace
+
+# =========================
+# OS-specific files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Jupyter Notebook checkpoints
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Test / coverage reports
+# =========================
+.coverage
+htmlcov/
+.pytest_cache/
+
+# =========================
+# Optional: data outputs
+# (Uncomment if you generate data files)
+# =========================
+# data/
+# outputs/
