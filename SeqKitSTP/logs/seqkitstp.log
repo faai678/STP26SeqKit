@@ -1,0 +1,2 @@
+2026-05-28 11:43:09,338 | ERROR | SeqKitSTP.modules.seq_separator | seq_separator.py:84 | Invalid character found: d
+2026-05-28 11:43:32,309 | ERROR | SeqKitSTP.modules.seq_separator | seq_separator.py:75 | Sequence is empty

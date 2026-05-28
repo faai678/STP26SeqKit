@@ -23,25 +23,39 @@ import os
 # this bit here is so that you dont hardcode paths, so its usable on any system without modification
 # creates path string for hidden log to be used later
 # --------------------------------------------------
-home_dir = os.path.expanduser("~")
-DEFAULT_LOG = os.path.join(home_dir, ".seqkitstp.log")
 
-LOG_FILE = DEFAULT_LOG
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Define logs folder INSIDE your package
+LOG_DIR = os.path.join(BASE_DIR, "logs")
+
+# Define log file inside that folder
+LOG_FILE = os.path.join(LOG_DIR, "seqkitstp.log")
+
+
+
+
+
+#home_dir = os.path.expanduser("~")
+#DEFAULT_LOG = os.path.join(home_dir, ".seqkitstp.log")
+
+#LOG_FILE = DEFAULT_LOG
 
 
 # --------------------------------------------------
 # STEP 2: NORMALISE the path (defensive step)
 # --------------------------------------------------
-LOG_FILE = os.path.abspath(os.path.expanduser(LOG_FILE))
+#LOG_FILE = os.path.abspath(os.path.expanduser(LOG_FILE))
 
 
 # --------------------------------------------------
 # STEP 3: Ensure directory exists
 # and if dont, it will create it (defensive step))
 # --------------------------------------------------
-log_dir = os.path.dirname(LOG_FILE)
-if log_dir:
-    os.makedirs(log_dir, exist_ok=True)
+LOG_DIR = os.path.dirname(LOG_FILE)
+if LOG_DIR:
+    os.makedirs(LOG_DIR, exist_ok=True)
 
 
 # --------------------------------------------------
@@ -85,7 +99,7 @@ LOGGING_CONFIG = {
             # (keeps disk usage focused on important events)
             "level": "ERROR",
             "formatter": "standard",
-            "filename": LOG_FILE,
+            "filename": LOG_FILE ,
             # --------------------------------------------------
             # ROTATION SETTINGS (IMPORTANT TEACHING POINT)
             # --------------------------------------------------

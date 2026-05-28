@@ -93,8 +93,8 @@ TEACHING TAKEAWAY
 
 import logging.config
 
-from SeqKitSTP.settings import LOGGING_CONFIG
-
+from SeqKitSTP.settings import LOGGING_CONFIG 
+#we know logging_conifg is in settings.py but it wont look for it auto.need to import 
 
 # --------------------------------------------------
 # LOGGING ACTIVATION FUNCTION
