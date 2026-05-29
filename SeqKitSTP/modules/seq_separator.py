@@ -25,70 +25,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def clean_sequence(sequence):
-    """
-    Clean the input sequence by removing whitespace and converting to lowercase.
-
-    Parameters
-    ----------
-    sequence : str
-        Input nucleotide sequence
-
-    Returns
-    -------
-    str
-        Cleaned sequence
-    """
-    logger.info("Cleaning input sequence...")
-    #remove whitespace, convert to lowercase, and remove spaces and newlines
-    cleaned_sequence = sequence.strip().lower().replace(" ", "").replace("\n", "")
-    
-    logger.debug("Cleaned sequence: %s", cleaned_sequence)
-    
-    return cleaned_sequence
-
-
-def validate_sequence(sequence):
-    """
-    Validate that the sequence contains only valid nucleotide characters.
-
-    Parameters
-    ----------
-    sequence : str
-        Cleaned nucleotide sequence
-
-    Returns
-    -------
-    None
-        Raises an error if invalid
-    """
-
-    logger.info("Validating sequence...")
-
-    # Check type
-    if not isinstance(sequence, str):
-        logger.error("Sequence must be a string")
-        raise TypeError("Sequence must be a string")
-
-    # Check empty
-    if not sequence:
-        logger.error("Sequence is empty")
-        raise ValueError("Sequence cannot be empty")
-
-    # Define valid characters
-    valid_nucleotides = {"a", "t", "g", "c", "n"}
-
-    # Check each character
-    for char in sequence:
-        if char not in valid_nucleotides:
-            logger.error("Invalid character found: %s", char)
-            raise ValueError(
-                "Sequence contains invalid characters. Only a, t, g, c, n allowed."
-            )
-
-    logger.debug("Sequence validation passed")
-
-
+from SeqKitSTP.modules.sequence_processing import clean_sequence, validate_sequence
 
 
 def block_sequence(sequence, block_size=10):
@@ -143,4 +80,11 @@ def block_sequence(sequence, block_size=10):
     logger.debug("Block sequence: %s", block_sequence_list)
 
     return block_sequence_list
+
+
+
+sequence = input("Enter a raw DNA sequence: ")
+block_size = int(input("Enter block size (e.g. 10): "))
+validate_sequence(sequence)
+print(block_sequence(sequence, block_size))
 

@@ -166,6 +166,7 @@ if __name__ == "__main__":
     # Multi-line input is acceptable because whitespace
     # is removed by chunk_string_to_blocks().
     dna_string = input("Enter a raw DNA sequence: ")
+    block_size = input("Enter block size (e.g. 10): ")
 
     """
         GCTGAGACTTCCTGGACGGGGGACAGGCTGTGGGGTTTCTCAGATAACTGGGCCCCTGCGCTCAGGAGGC
