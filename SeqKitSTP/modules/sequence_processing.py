@@ -5,12 +5,11 @@ PURPOSE
 -------------------------------------------------------------------------------
 This module takes a nucleotide sequence input, clean and validates the sequence.
 Expected input: a string of nucleotides (e.g. "ATGCGTACGTAGCTAG")
-Expected output: a string of nucleotides separated into blocks of desired length 
+Expected output: a cleaned string of nucleotides remove whitespace, convert to lowercase, and remove spaces and newlines
 -------------------------------------------------------------------------------
 INPUT
 -------------------------------------------------------------------------------
 - Sequence input: string containing nucleotides in text format file??
-- Desired block length: integer (e.g. 10 for blocks of 10 nucleotides)
 - Formats of nucleotide for different types of sequence (e.g. DNA, RNA)??
 -------------------------------------------------------------------------------
 OUTPUT
