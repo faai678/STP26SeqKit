@@ -31,7 +31,7 @@ from sequence_processing import clean_sequence, validate_sequence  # Import spec
 class SequenceError(Exception):
     pass
 
-def transcribe(dna_sequence):
+def dna_transcribe(dna_sequence):
     """
     Transcribe a DNA sequence to RNA.
 
@@ -46,7 +46,7 @@ def transcribe(dna_sequence):
         Transcribed RNA sequence.
     """
     # Log the incoming sequence for traceability/debugging.
-    logger.info(f"Transcribing DNA: {dna_sequence}")
+    logger.info("Transcribing DNA: %s", dna_sequence)
 
     # Remove all whitespace (spaces, tabs, newlines).
     # .split() breaks the string on whitespace -> list of chunks
@@ -62,14 +62,18 @@ def transcribe(dna_sequence):
     # (only A, T, G, C and uppercase).
     validate_sequence(dna_sequence_cleaned)
 
+    # Log the cleaned sequence before transcription.
+    logger.info("DNA sequence validation successful.")
+    
+
+
     # Perform transcription:
     # Replace thymine (T) with uracil (U) to simulate RNA
     # Convert to lowercase to indicate RNA output convention
     rna_sequence = dna_sequence_cleaned.replace("T", "U").lower()
 
     # Log the resulting RNA sequence.
-    logger.info(f"Transcribed RNA: {rna_sequence}")
+    logger.info("Transcribed RNA: %s", rna_sequence)
 
     # Return the final RNA sequence
     return rna_sequence
-

@@ -26,7 +26,6 @@ import logging
 from SeqKitSTP.modules.DNA_transcriber import SequenceError
 logger = logging.getLogger(__name__)
 
-import SequenceError
 
 def clean_sequence(sequence):
     """
@@ -80,7 +79,7 @@ def validate_sequence(sequence, valid_bases, sequence_type):
     # Loop through each base in the sequence.
     # enumerate() gives both the position (pos) and the base itself.
     # start=1 makes positions biologically intuitive (1-based indexing).
-    for pos, base in enumerate(dna_sequence, start=1):
+    for pos, base in enumerate(sequence, start=1):
          # Check that each base is one of the allowed DNA nucleotides.
         if base not in [valid_bases]:
             # Raise a detailed error including the invalid base and its position.
