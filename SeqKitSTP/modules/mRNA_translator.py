@@ -23,6 +23,9 @@ import logging
 logger = logging.getLogger(__name__)
 from SeqKitSTP.modules import sequence_processing 
 
+class SequenceError(Exception):
+    pass
+
 # Standard genetic code
 GENETIC_CODE = {
     # Phenylalanine
