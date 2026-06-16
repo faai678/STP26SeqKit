@@ -26,95 +26,96 @@ from SeqKitSTP.modules import sequence_processing
 # Standard genetic code
 GENETIC_CODE = {
     # Phenylalanine
-    "UUU": "F", "UUC": "F",
+    "uuu": "F", "uuc": "F",
 
     # Leucine
-    "UUA": "L", "UUG": "L",
-    "CUU": "L", "CUC": "L", "CUA": "L", "CUG": "L",
+    "uua": "L", "uug": "L",
+    "cuu": "L", "cuc": "L", "cua": "L", "cug": "L",
 
     # Isoleucine
-    "AUU": "I", "AUC": "I", "AUA": "I",
+    "auu": "I", "auc": "I", "aua": "I",
 
     # Methionine (START)
-    "AUG": "M",
+    "aug": "M",
 
     # Valine
-    "GUU": "V", "GUC": "V", "GUA": "V", "GUG": "V",
+    "guu": "V", "guc": "V", "gua": "V", "gug": "V",
 
     # Serine
-    "UCU": "S", "UCC": "S", "UCA": "S", "UCG": "S",
-    "AGU": "S", "AGC": "S",
+    "ucu": "S", "ucc": "S", "uca": "S", "ucg": "S",
+    "agu": "S", "agc": "S",
 
     # Proline
-    "CCU": "P", "CCC": "P", "CCA": "P", "CCG": "P",
+    "ccu": "P", "ccc": "P", "cca": "P", "ccg": "P",
 
     # Threonine
-    "ACU": "T", "ACC": "T", "ACA": "T", "ACG": "T",
+    "acu": "T", "acc": "T", "aca": "T", "acg": "T",
 
     # Alanine
-    "GCU": "A", "GCC": "A", "GCA": "A", "GCG": "A",
+    "gcu": "A", "gcc": "A", "gca": "A", "gcg": "A",
 
     # Tyrosine
-    "UAU": "Y", "UAC": "Y",
+    "uau": "Y", "uac": "Y",
 
     # Histidine
-    "CAU": "H", "CAC": "H",
+    "cau": "H", "cac": "H",
 
     # Glutamine
-    "CAA": "Q", "CAG": "Q",
+    "caa": "Q", "cag": "Q",
 
     # Asparagine
-    "AAU": "N", "AAC": "N",
+    "aau": "N", "aac": "N",
 
     # Lysine
-    "AAA": "K", "AAG": "K",
+    "aaa": "K", "aag": "K",
 
     # Aspartic Acid
-    "GAU": "D", "GAC": "D",
+    "gau": "D", "gac": "D",
 
     # Glutamic Acid
-    "GAA": "E", "GAG": "E",
+    "gaa": "E", "gag": "E",
 
     # Cysteine
-    "UGU": "C", "UGC": "C",
+    "ugu": "C", "ugc": "C",
 
     # Tryptophan
-    "UGG": "W",
+    "ugg": "W",
 
     # Arginine
-    "CGU": "R", "CGC": "R", "CGA": "R", "CGG": "R",
-    "AGA": "R", "AGG": "R",
+    "cgu": "R", "cgc": "R", "cga": "R", "cgg": "R",
+    "aga": "R", "agg": "R",
 
     # Glycine
-    "GGU": "G", "GGC": "G", "GGA": "G", "GGG": "G",
+    "ggu": "G", "ggc": "G", "gga": "G", "ggg": "G",
 
     # STOP codons
-    "UAA": "STOP",
-    "UAG": "STOP",
-    "UGA": "STOP"
+    "uaa": "STOP",
+    "uag": "STOP",
+    "uga": "STOP"
 }
+
 def rna_translate(rna_sequence):
     """
     Translate an mRNA sequence to a protein sequence.
     """
     logger.info("Translating RNA: %s", rna_sequence)
 
-#validate input RNA sequence
-    logger.info("Validating sequence...",sequence_type)
-    valid_bases = ["A", "U", "C", "G", "a", "u", "c", "g"]
+# clean and validate input RNA sequence
+
+    valid_bases = ["a", "u", "c", "g"]
     sequence_type = "RNA"
+    logger.info("Cleaning and validating %s sequence...",sequence_type)
+
     rna_sequence_cleaned = sequence_processing.clean_sequence(rna_sequence)
     sequence_processing.validate_sequence(rna_sequence_cleaned, valid_bases, sequence_type)
 
-    # Ensure uppercase
-    rna_sequence_upper = rna_sequence_cleaned.upper()
-
+    #create empty protein list
     protein = []
     start_found = False
 
     # Iterate in codons (3 bases)
-    for i in range(0, len(rna_sequence_upper), 3):
-        codon = rna_sequence[i:i+3]
+    for i in range(0, len(rna_sequence_cleaned), 3):
+        codon = rna_sequence_cleaned[i:i+3]
 
         if len(codon) < 3:
             break  # ignore incomplete codon at end
@@ -122,11 +123,12 @@ def rna_translate(rna_sequence):
         amino_acid = GENETIC_CODE.get(codon)
 
         if amino_acid is None:
+            logger.error("Invalid codon: %s", codon)
             raise ValueError(f"Invalid codon: {codon}")
 
         # Wait for start codon
         if not start_found:
-            if codon == "AUG":
+            if codon == "aug":
                 start_found = True
                 protein.append("M")
             continue
@@ -137,6 +139,10 @@ def rna_translate(rna_sequence):
 
         protein.append(amino_acid)
 
+        if not start_found:
+            logger.error("No start codon found in the sequence")
+            raise ValueError("No start codon found in the sequence")
+    # joins aminoacids list into string
     result = "".join(protein)
     logger.info("Protein sequence: %s", result)
 

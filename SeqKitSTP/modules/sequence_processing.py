@@ -52,7 +52,7 @@ def clean_sequence(sequence):
 
 def validate_sequence(sequence, valid_bases, sequence_type):
     """
-    Validate that the sequence contains only valid nucleotide characters.
+    Validate that the sequence contains only valid nucleotide characters and correct case for the specified sequence type (DNA, RNA, etc.).
 
     Parameters
     ----------
@@ -65,24 +65,39 @@ def validate_sequence(sequence, valid_bases, sequence_type):
         Raises an error if invalid
     """
 
-    logger.info("Validating sequence...",sequence_type)
+    logger.info("Validating %s sequence...", sequence_type)
 
     # Check type
     if not isinstance(sequence, str):
         logger.error("Sequence must be a string")
         raise TypeError("Sequence must be a string")
-
+   
     # Check empty
     if not sequence:
         logger.error("Sequence is empty")
         raise ValueError("Sequence cannot be empty")
+   
+    #case checks
+    if sequence_type == "DNA":
+        if not sequence.isupper():
+            logger.error("Invalid case for %s sequence: %s", sequence_type, sequence)
+            raise SequenceError(f"Invalid case for {sequence_type} sequence: {sequence}")
+        
+    elif sequence_type == "RNA":
+        if not sequence.islower():
+            logger.error("Invalid case for %s sequence: %s", sequence_type, sequence)
+            raise SequenceError(f"Invalid case for {sequence_type} sequence: {sequence}")
+
+
+    # validate bases
     # Loop through each base in the sequence.
     # enumerate() gives both the position (pos) and the base itself.
     # start=1 makes positions biologically intuitive (1-based indexing).
     for pos, base in enumerate(sequence, start=1):
          # Check that each base is one of the allowed DNA nucleotides.
-        if base not in [valid_bases]:
+        if base not in valid_bases:
             # Raise a detailed error including the invalid base and its position.
-            raise SequenceError(f"Non-DNA base {base} at position {pos}")
+            logger.error("Non-%s base %s at position %d", sequence_type, base, pos)
+            raise SequenceError(f"Non-{sequence_type} base {base} at position {pos}")
 
     logger.info("Sequence validation passed")

@@ -60,12 +60,13 @@ def dna_transcribe(dna_sequence):
 
     # Validate that the cleaned sequence is valid DNA
     # (only A, T, G, C and uppercase).
-    validate_sequence(dna_sequence_cleaned)
+    valid_bases = ["A", "T", "C", "G"]
+    sequence_type = "DNA"
+    validate_sequence(dna_sequence_cleaned, valid_bases, sequence_type)
 
     # Log the cleaned sequence before transcription.
     logger.info("DNA sequence validation successful.")
     
-
 
     # Perform transcription:
     # Replace thymine (T) with uracil (U) to simulate RNA
