@@ -142,9 +142,10 @@ def rna_translate(rna_sequence):
 
         protein.append(amino_acid)
 
-        if not start_found:
-            logger.error("No start codon found in the sequence")
-            raise ValueError("No start codon found in the sequence")
+    if not start_found:
+        logger.error("No start codon found in the sequence")
+        raise ValueError("No start codon found in the sequence")
+    
     # joins aminoacids list into string
     result = "".join(protein)
     logger.info("Protein sequence: %s", result)
