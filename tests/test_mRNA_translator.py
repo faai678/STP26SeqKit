@@ -98,9 +98,6 @@ def test_translate_rna():
     assert translated_rna == rna_expected_output 
 
 
-
-
-
 def test_translate_stops_at_stop_codon():
     """
     Test that translation stops at the first stop codon.

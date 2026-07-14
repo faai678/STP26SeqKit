@@ -39,7 +39,7 @@ GENETIC_CODE = {
     "auu": "I", "auc": "I", "aua": "I",
 
     # Methionine (START)
-    "aug": "M",
+    "aug": "M", 
 
     # Valine
     "guu": "V", "guc": "V", "gua": "V", "gug": "V",
