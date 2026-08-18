@@ -1,2 +1,4 @@
 2026-05-28 11:43:09,338 | ERROR | SeqKitSTP.modules.seq_separator | seq_separator.py:84 | Invalid character found: d
 2026-05-28 11:43:32,309 | ERROR | SeqKitSTP.modules.seq_separator | seq_separator.py:75 | Sequence is empty
+2026-07-22 14:33:05,991 | ERROR | SeqKitSTP.code_examples.ensemble_api_requests | ensemble_api_requests.py:64 | HTTP error occurred: 400 Client Error: Bad Request for url: http://rest.ensembl.org/lookup/id/%1B?expand=1&mane=1
+2026-07-22 14:34:17,009 | ERROR | SeqKitSTP.code_examples.ensemble_api_requests | ensemble_api_requests.py:64 | HTTP error occurred: 400 Client Error: Bad Request for url: http://rest.ensembl.org/lookup/id/BRCA2?expand=1&mane=1
